@@ -1,0 +1,39 @@
+.header {
+  min-height: 7vh;
+  background: linear-gradient(90deg, rgba(15, 23, 42, 0.98), rgba(30, 41, 59, 0.98));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.28);
+}
+
+.header a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.header .logo a {
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.header nav a {
+  margin-left: 1.3rem;
+  color: rgba(226, 232, 240, 0.92);
+  font-weight: 600;
+}
+
+.header nav a:hover,
+.header nav a.active {
+  color: white;
+}
+
+.header p {
+  margin: 0;
+  color: var(--text);
+}
+
+.header .active span {
+  color: var(--accent);
+}
