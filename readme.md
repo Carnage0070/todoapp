@@ -23,6 +23,8 @@ A full-stack Todo application built with MongoDB, Express, React, and Node.js fe
 
 ## 🌐 Live Demo
 
+Live app: [https://todoappp-sooty.vercel.app/login](https://todoappp-sooty.vercel.app/login)
+
 To see the app in action locally, follow the [Installation](#installation) and [Running the Application](#running-the-application-) sections below.
 
 **Want to deploy your own version?** Check out these free deployment options:
