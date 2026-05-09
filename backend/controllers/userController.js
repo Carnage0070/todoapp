@@ -2,6 +2,15 @@ import userModel from "../models/userModel.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import validator from "validator";
+import { OAuth2Client } from "google-auth-library";
+
+//create token
+const createToken = (id) => {
+    const secret = process.env.JWT_SECRET || "supersecret123"
+    return jwt.sign({id}, secret, {
+        expiresIn: 3 * 24 * 60 * 60
+    })
+}
 
 //create token
 const createToken = (id) => {
@@ -76,4 +85,45 @@ const getUser = async (req,res) => {
         res.status(502).json({message: error.message})
     }
 }
-export {loginUser, registerUser, getUser}
+
+//google auth
+const googleAuth = async (req, res) => {
+    const { token } = req.body;
+    try {
+        const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+        const ticket = await client.verifyIdToken({
+            idToken: token,
+            audience: process.env.GOOGLE_CLIENT_ID,
+        });
+        const payload = ticket.getPayload();
+        const { sub: googleId, email, name, picture } = payload;
+
+        // Check if user exists
+        let user = await userModel.findOne({ $or: [{ googleId }, { email }] });
+
+        if (!user) {
+            // Create new user
+            user = new userModel({
+                name,
+                email,
+                googleId,
+                avatar: picture,
+                password: await bcrypt.hash(Math.random().toString(36), 10), // Random password for Google users
+            });
+            await user.save();
+        } else if (!user.googleId) {
+            // Link Google account to existing user
+            user.googleId = googleId;
+            user.avatar = picture;
+            await user.save();
+        }
+
+        const jwtToken = createToken(user._id);
+        res.status(200).json({ user, token: jwtToken });
+    } catch (error) {
+        console.error('Google auth error:', error);
+        res.status(500).json({ message: 'Google authentication failed' });
+    }
+};
+
+export {loginUser, registerUser, getUser, googleAuth}
