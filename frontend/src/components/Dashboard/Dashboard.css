@@ -1,17 +1,265 @@
 .dashboard {
     min-height: 100vh;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: radial-gradient(ellipse at center, #0a0a0a 0%, #000000 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.dashboard::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(120, 255, 198, 0.3) 0%, transparent 50%);
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33% { transform: translateY(-10px) rotate(1deg); }
+    66% { transform: translateY(10px) rotate(-1deg); }
+}
+
+.dashboard h1 {
+    font-family: 'Courier New', monospace;
+    text-align: center;
+    background: linear-gradient(45deg, #00ff88, #00ccff, #ff0080);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 3s ease-in-out infinite;
+    text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
 }
 
 .stat-card {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
+    background: rgba(0, 20, 40, 0.8);
+    border: 2px solid;
+    border-image: linear-gradient(45deg, #00ff88, #00ccff, #ff0080) 1;
+    box-shadow:
+        0 0 20px rgba(0, 255, 136, 0.3),
+        inset 0 0 20px rgba(0, 255, 136, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #00ff88, #00ccff, #ff0080, #00ff88);
+    z-index: -1;
+    filter: blur(10px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .stat-card:hover {
-    transform: translateY(-2px);
+    transform: translateY(-5px) scale(1.02);
+    box-shadow:
+        0 0 30px rgba(0, 255, 136, 0.5),
+        0 0 60px rgba(0, 204, 255, 0.3),
+        inset 0 0 30px rgba(0, 255, 136, 0.2);
+}
+
+.stat-card:hover::before {
+    opacity: 1;
+}
+
+.stat-card h3 {
+    font-family: 'Courier New', monospace;
+    color: #00ff88;
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.stat-card p {
+    font-family: 'Courier New', monospace;
+    color: #ffffff;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    font-size: 2.5rem;
+    font-weight: bold;
 }
 
 .chart-card {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background: rgba(0, 20, 40, 0.9);
+    border: 2px solid;
+    border-image: linear-gradient(45deg, #00ccff, #ff0080, #00ff88) 1;
+    box-shadow:
+        0 0 20px rgba(0, 204, 255, 0.3),
+        inset 0 0 20px rgba(0, 204, 255, 0.1);
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.chart-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 255, 136, 0.1) 2px,
+            rgba(0, 255, 136, 0.1) 4px
+        );
+    animation: scanline 2s linear infinite;
+}
+
+@keyframes scanline {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+}
+
+.chart-card h3 {
+    font-family: 'Courier New', monospace;
+    color: #00ccff;
+    text-shadow: 0 0 10px rgba(0, 204, 255, 0.5);
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.progress-circle {
+    background: rgba(0, 20, 40, 0.8);
+    border: 2px solid;
+    border-image: linear-gradient(45deg, #ff0080, #00ff88, #00ccff) 1;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow:
+        0 0 20px rgba(255, 0, 128, 0.3),
+        inset 0 0 20px rgba(255, 0, 128, 0.1);
+    position: relative;
+}
+
+.progress-circle h3 {
+    font-family: 'Courier New', monospace;
+    color: #ff0080;
+    text-shadow: 0 0 10px rgba(255, 0, 128, 0.5);
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.progress-circle svg {
+    filter: drop-shadow(0 0 10px rgba(0, 255, 136, 0.5));
+}
+
+.progress-circle text {
+    font-family: 'Courier New', monospace;
+    fill: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Matrix rain effect */
+.matrix-rain {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.1;
+}
+
+.matrix-rain::before {
+    content: '0101001001010010010100100101001001010010';
+    position: absolute;
+    top: -100px;
+    left: 10%;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #00ff88;
+    animation: matrixFall 8s linear infinite;
+}
+
+@keyframes matrixFall {
+    0% { transform: translateY(-100px); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(100vh); opacity: 0; }
+}
+
+/* Glitch effect for title */
+.glitch {
+    position: relative;
+    animation: glitch 2s infinite;
+}
+
+@keyframes glitch {
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+}
+
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.glitch::before {
+    animation: glitch-1 0.5s infinite;
+    color: #00ccff;
+    z-index: -1;
+}
+
+.glitch::after {
+    animation: glitch-2 0.5s infinite;
+    color: #ff0080;
+    z-index: -2;
+}
+
+@keyframes glitch-1 {
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+}
+
+@keyframes glitch-2 {
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(2px, -2px); }
+    40% { transform: translate(2px, 2px); }
+    60% { transform: translate(-2px, -2px); }
+    80% { transform: translate(-2px, 2px); }
+}
+
+/* Pulse animation for progress circle */
+@keyframes pulse {
+    0%, 100% {
+        filter: drop-shadow(0 0 10px rgba(0, 255, 136, 0.8));
+    }
+    50% {
+        filter: drop-shadow(0 0 20px rgba(0, 255, 136, 1));
+    }
 }
