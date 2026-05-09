@@ -21,6 +21,14 @@ A full-stack Todo application built with MongoDB, Express, React, and Node.js fe
 - **Responsive Design**: Mobile-friendly interface with Tailwind CSS
 - **Dark Theme**: Modern dark gradient UI with glass morphism effects
 
+## 🌐 Live Demo
+
+To see the app in action locally, follow the [Installation](#installation) and [Running the Application](#running-the-application-) sections below.
+
+**Want to deploy your own version?** Check out these free deployment options:
+- **Frontend**: [Vercel](https://vercel.com) • [Netlify](https://netlify.com) • [Firebase Hosting](https://firebase.google.com/products/hosting)
+- **Backend**: [Railway](https://railway.app) • [Render](https://render.com) • [Heroku](https://heroku.com) • [Vercel Functions](https://vercel.com/docs/concepts/functions/serverless-functions)
+
 ## Tech Stack 🛠️
 
 **Frontend:**
