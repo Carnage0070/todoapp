@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: mern-todo-backend
+    runtime: node
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && node server.js
+    envVars:
+      - key: MONGO_URI
+        prompt: false
+      - key: GMAIL_USERNAME
+        prompt: false
+      - key: GMAIL_PASSWORD
+        prompt: false
+      - key: JWT_SECRET
+        prompt: false
+      - key: PORT
+        value: 8001
