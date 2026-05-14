@@ -110,6 +110,9 @@ Frontend runs on: `http://localhost:3000`
 - `POST /api/user/login` - Login user
 - `GET /api/user/getUser` - Get current user
 
+> **Important:** GitHub OAuth / GitHub login is not implemented in this repository.
+> The current app supports only email/password login and Google authentication.
+
 ### Tasks
 - `POST /api/task/addTask` - Create new task
 - `GET /api/task/getTask` - Get all user tasks

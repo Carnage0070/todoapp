@@ -12,14 +12,6 @@ const createToken = (id) => {
     })
 }
 
-//create token
-const createToken = (id) => {
-    const secret = process.env.JWT_SECRET || "supersecret123"
-    return jwt.sign({id}, secret, {
-        expiresIn: 3 * 24 * 60 * 60
-    })
-}
-
 //login user
 const loginUser = async (req,res) => {
     const {email, password} = req.body;
